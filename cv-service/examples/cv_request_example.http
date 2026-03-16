@@ -1,0 +1,9 @@
+### POST request to example server
+### Используйте формат base64 при отправке изображений
+POST http://0.0.0.0:8080/api/v1/cv
+Authorization: Bearer SUPER SECRET PASSWORD
+
+
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==
+
+###
