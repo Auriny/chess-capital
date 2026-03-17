@@ -2,7 +2,7 @@ import io
 from datetime import UTC, datetime
 
 from anyio import Path, to_thread
-from chess import Move
+from chess import IllegalMoveError, Move
 from chess.pgn import Game, read_game
 
 from config import settings
@@ -38,7 +38,7 @@ class ChessFacade:
             "Round": str(data.round),
             "Site": str(data.stream_url),
         })
-        date_and_time = datetime.now(tz=UTC).strftime("%Y-%m-%d %H:%M:%S%z")
+        date_and_time = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
         file = Path(
             f"{settings.PGN_FILES_FOLDER}/{date_and_time}.pgn"
         )
@@ -64,6 +64,9 @@ class ChessFacade:
     async def push(move: str) -> None:
         game = await ChessFacade.load_game()
         node = game.end()
+        if move not in node.board().legal_moves:
+            msg = f"Illegal move {move!s}"
+            raise IllegalMoveError(msg)
         move_instance = Move.from_uci(move)
         await to_thread.run_sync(node.add_variation, move_instance)
         if (game.end().board().is_game_over()):
@@ -75,3 +78,7 @@ class ChessFacade:
         game = await ChessFacade.load_game()
         game.headers["Result"] = "1/2-1/2"
         await ChessFacade.save_game(game)
+
+    @staticmethod
+    async def get_move(board: list[list[int]]) -> Move:
+        pass

@@ -3,18 +3,17 @@ from typing import Annotated
 from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 
-from utils.chess_facade import ChessFacade
+from utils import ChessFacade
 
 router = APIRouter()
 
 @router.post(path="/send")
 async def send_move(
-    move: Annotated[str, Query(
-        description="Player's move in UCI notation",
-        pattern=r"([a-h][1-8]){2}",
-        min_length=4, max_length=4
+    board: Annotated[list[list[int]], Query(
+        description="Chess board in matrix"
     )]
 ) -> JSONResponse:
+    move = await ChessFacade.get_move(board)
     await ChessFacade.push(move)
     return JSONResponse(
         status_code=200,

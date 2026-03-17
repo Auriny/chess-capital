@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 
 from models.requests import StartGame
 from models.responses import GameResponse
-from utils.chess_facade import ChessFacade
+from utils import ChessFacade
 
 router = APIRouter()
 
