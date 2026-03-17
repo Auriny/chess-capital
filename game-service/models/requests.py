@@ -20,8 +20,8 @@ class StartGame(BaseModel):
     @field_validator("date")
     @classmethod
     def validate_date(cls, value: datetime.date) -> datetime.date:
-        if value < datetime.datetime.now(tz=datetime.UTC).date():
-            msg = "Date must be today or later."
+        if value != datetime.datetime.now(tz=datetime.UTC).date():
+            msg = "Date must be today."
             raise ValueError(msg)
         return value
 
