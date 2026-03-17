@@ -64,7 +64,7 @@ class ChessFacade:
     async def push(move: str) -> None:
         game = await ChessFacade.load_game()
         node = game.end()
-        if move not in node.board().legal_moves:
+        if Move.from_uci(move) not in node.board().legal_moves:
             msg = f"Illegal move {move!s}"
             raise IllegalMoveError(msg)
         move_instance = Move.from_uci(move)

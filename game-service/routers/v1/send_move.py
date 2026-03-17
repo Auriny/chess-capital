@@ -14,7 +14,7 @@ async def send_move(
     )]
 ) -> JSONResponse:
     move = await ChessFacade.get_move(board)
-    await ChessFacade.push(move)
+    await ChessFacade.push(str(move))
     return JSONResponse(
         status_code=200,
         content={"status": "ok","move": move}
