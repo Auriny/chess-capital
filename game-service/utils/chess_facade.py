@@ -38,8 +38,9 @@ class ChessFacade:
             "Round": str(data.round),
             "Site": str(data.stream_url),
         })
+        date_and_time = datetime.now(tz=UTC).strftime("%Y-%m-%d %H:%M:%S%z")
         file = Path(
-            f"{settings.PGN_FILES_FOLDER}/{datetime.now(tz=UTC)}.pgn"
+            f"{settings.PGN_FILES_FOLDER}/{date_and_time}.pgn"
         )
         await file.write_text(str(game))
 
