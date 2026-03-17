@@ -21,7 +21,7 @@ class ChessFacade:
         for file in files:
             content = await file.read_text()
             game = await to_thread.run_sync(read_game, io.StringIO(content))
-            if game and not game.end().board().is_game_over():
+            if (game and not game.end().is_end()):
                 return file
         msg = "No active games found."
         raise GameNotFoundError(active=False, msg=msg)
@@ -66,4 +66,12 @@ class ChessFacade:
         node = game.end()
         move_instance = Move.from_uci(move)
         await to_thread.run_sync(node.add_variation, move_instance)
+        if (game.end().board().is_game_over()):
+            game.headers["Result"] = game.end().board().result()
+        await ChessFacade.save_game(game)
+
+    @staticmethod
+    async def end_game() -> None:
+        game = await ChessFacade.load_game()
+        game.headers["Result"] = "1/2-1/2"
         await ChessFacade.save_game(game)

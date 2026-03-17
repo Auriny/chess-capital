@@ -31,5 +31,13 @@ async def get_game_data() -> JSONResponse:
                 "pgn": str(game)
             },
             stream_url=game.headers["Site"]
-        ).model_dump()
+        ).model_dump(mode="json")
+    )
+
+@router.post("/end")
+async def end_game() -> JSONResponse:
+    await ChessFacade.end_game()
+    return JSONResponse(
+        status_code=200,
+        content={"status": "ok"}
     )
