@@ -22,7 +22,14 @@ class ChessFacade:
         for file in files:
             content = await file.read_text()
             game = await to_thread.run_sync(read_game, io.StringIO(content))
-            if game and game.headers["Result"] == "*":
+            if game and (
+                game.headers["Result"] == "*"
+                or not file.name.startswith("FINISHED_")
+            ):
+                if game.headers["Result"] != "*":
+                    file = await file.rename(  # noqa: PLW2901
+                        f"{settings.PGN_FILES_FOLDER}/FINISHED_{file.name}"
+                    )
                 return file
         msg = "No active games found."
         raise GameNotFoundError(active=False, msg=msg)
