@@ -1,0 +1,2 @@
+GAME_PORT: int
+HOST_NAME: str
