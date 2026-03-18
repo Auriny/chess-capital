@@ -5,15 +5,18 @@ from fastapi.responses import JSONResponse
 
 from models.requests import StartGame
 from models.responses import GameResponse
-from utils import ChessFacade
+from utils import ChessFacade, lichess
 
 router = APIRouter()
 
 @router.post("/start")
-async def start_game(body: Annotated[StartGame, Body(
-    description="Game settings"
-)]) -> JSONResponse:
+async def start_game(
+    body: Annotated[StartGame, Body(
+        description="Game settings"
+    )]
+) -> JSONResponse:
     await ChessFacade.create_game(body)
+    await lichess.start()
     return JSONResponse(
         status_code=200,
         content={"active": True}

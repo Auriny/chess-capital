@@ -8,6 +8,7 @@ from chess.pgn import Game, read_game
 from config import settings
 from exceptions import GameNotFoundError
 from models.requests import StartGame
+from utils.lichess_stream import lichess
 
 
 class ChessFacade:
@@ -77,6 +78,8 @@ class ChessFacade:
     async def end_game() -> None:
         game = await ChessFacade.load_game()
         game.headers["Result"] = "1/2-1/2"
+        await lichess.send_pgn(str(game.end()))
+        await lichess.end()
         await ChessFacade.save_game(game)
 
     @staticmethod

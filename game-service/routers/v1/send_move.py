@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Body
 from fastapi.responses import JSONResponse
 
-from utils import ChessFacade
+from utils import ChessFacade, lichess
 
 router = APIRouter()
 
@@ -15,6 +15,7 @@ async def send_move(
 ) -> JSONResponse:
     move = await ChessFacade.get_move(board)
     await ChessFacade.push(str(move))
+    await lichess.send_pgn(str(ChessFacade.load_game()))
     return JSONResponse(
         status_code=200,
         content={"status": "ok","move": move}
