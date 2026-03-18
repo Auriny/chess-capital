@@ -49,8 +49,8 @@ def process_board(json_body: dict[str, Any]):
 
     pprint(board)
     resp = requests.post(
-        f"http://{cfg.HOST_NAME}/send",
+        f"https://{cfg.HOST_NAME}/send",
         json=board
     )
-    print(resp.json())
+    print(resp.text)
     return board
