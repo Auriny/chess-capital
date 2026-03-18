@@ -116,6 +116,13 @@
 #
 ## Ладно, расскажу
 
+### Для начала нужно достать модель
+```
+https://huggingface.co/surawut/chess-move-tracking-yolo11/resolve/main/models/yolo11m_pieces.pt?download=true
+```
+
+### Дальше её надо перекинуть в корень папки с сервисом и переименовать в model.pt
+
 ### Установи uv
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -126,13 +133,19 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv python pin 3.11.14
 ```
 
-### Также нужно указать api ключ, он нужен
-Файл .env:
-```dotenv
-SECRET_KEY="gooooooooooooooooooooooool" # Заменить на свой
+### Установи зависимости
+
+```bash
+uv venv
+uv sync
 ```
 
-Запускать с помощью команды
+### Укажи порт сервиса игры
+```text
+GAME_PORT = 8080
+```
+
+### Запускать с помощью команды
 
 ```bash
 uv run uvicorn main:app --reload --host 0.0.0.0 --port 8080 # Тут порт заменить на нужный
@@ -140,4 +153,4 @@ uv run uvicorn main:app --reload --host 0.0.0.0 --port 8080 # Тут порт з
 
 При желании, можно запустить его как сервис если добавить аргумент -D/--daemon в строку запуска
 
-<p style="font-size: 1px;">42 БРАТУХА 42 42 42 42</p>
+<sub><sup><sub><sup><sub><sup><sub><sup>42 БРАТУХА 42 42 42 42</sub></sup></sub></sup></sub></sup></sub></sup>

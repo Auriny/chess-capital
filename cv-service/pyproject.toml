@@ -5,9 +5,11 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11.14"
 dependencies = [
+    "aiohttp>=3.13.3",
     "fastapi>=0.135.1",
     "mypy>=1.19.1",
-    "python-dotenv>=1.2.2",
+    "python-dotenv",
     "ruff>=0.15.6",
+    "ultralytics>=8.4.23",
     "uvicorn>=0.42.0",
 ]
