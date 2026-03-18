@@ -35,19 +35,23 @@ async def frame(request: Request):
 
     board = process_board(json_body)
 
-    return JSONResponse(status_code=status.HTTP_200_OK, content=board)
+    return JSONResponse(status_code=status.HTTP_200_OK, content={})
 
 
 def process_board(json_body: dict[str, Any]):
     frame_type, frame_bytes = decode_frame(json_body["frame"])
+
+    with open("image.png", "wb") as f:
+        f.write(frame_bytes)
+
     decoded = cv2.imdecode(np.frombuffer(frame_bytes, np.uint8), -1)
     board = recognize(decoded, json_body["metadata"])
 
     pprint(board)
-    print(json.dumps(board))
     resp = requests.post(
-        f"https://{cfg.HOST_NAME}/api/v1/game/api/v1/game/send",
-        data=json.dumps(board),
+        f"http://{cfg.HOST_NAME}/send",
+        headers={"Content-Type": "application/json"},
+        data=json.dumps(board)
     )
     print(resp.json())
     return board

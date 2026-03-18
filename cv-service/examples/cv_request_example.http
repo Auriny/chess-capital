@@ -1,6 +1,6 @@
 ### POST request to example server
 ### Используйте формат base64 при отправке изображений
-POST http://0.0.0.0:8080/frame
+POST http://0.0.0.0:8081/frame
 Content-Type: application/json
 
 
