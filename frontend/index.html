@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://chess.komaru.ru">
     <meta property="og:image" content="https://chess.komaru.ru/preview.jpg">
 
-    <title>ПМЭФ 2026</title>
+    <title>ПМЭФ 2026: Прямой эфир</title>
     
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -60,11 +60,10 @@
     <div id="game-overlay" class="fixed inset-0 z-40 bg-white/60 dark:bg-gray-900/70 backdrop-blur-xl flex flex-col justify-center items-center transition-all duration-500 opacity-100 pointer-events-auto px-4">
         <div class="mt-16 w-full max-w-2xl min-h-[300px] p-8 md:p-12 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col justify-center items-center text-center">
             <svg class="w-20 h-20 mb-6 text-blue-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Игра ещё не начата!</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Трансляция ещё не начата</h2>
             <p class="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-lg">
-                Ожидайте начала трансляции. Партия скоро начнется.
+                Ожидайте начала партии.
             </p>
-            <!-- <div id="overlay-buttons" class="flex flex-wrap justify-center gap-4 w-full"></div> -->
         </div>
     </div>
 
@@ -79,6 +78,7 @@
                 <iframe
                     id="vk-player"
                     class="absolute inset-0 w-full h-full border-0"
+                    src=""
                     allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
                     allowfullscreen>
                 </iframe>
@@ -148,7 +148,13 @@
             const isScrolledToBottom = historyBox.scrollHeight - historyBox.clientHeight <= historyBox.scrollTop + 10;
             const previousScrollTop = historyBox.scrollTop;
 
-            const cleanMoves = pgnStr.replace(/\d+\./g, '').trim().split(/\s+/).filter(m => m !== '');
+            const cleaned = cleanPGN(pgnStr);
+            const cleanMoves = cleaned
+                .replace('*', '')
+                .replace(/\d+\./g, '')
+                .trim()
+                .split(/\s+/)
+                .filter(m => m !== '');
             
             let html = '';
             for(let i = 0; i < cleanMoves.length; i += 2) {
@@ -199,9 +205,37 @@
             }
         }
 
+        function cleanPGN(pgn) {
+            return pgn
+                .replace(/\[.*?\]\s*/g, '')
+                .replace(/\r?\n/g, ' ')
+                .replace(/\b(1-0|0-1|1\/2-1\/2|\*)\b/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function vkLinkToEmbed(url) {
+            if (!url) return null;
+            if (url.includes("app/embed")) return url;
+
+            const liveMatch = url.match(/vkvideo\.ru\/([^/?]+)/);
+            if (liveMatch) {
+                return `https://live.vkvideo.ru/app/embed/${liveMatch[1]}`;
+            }
+
+            const videoMatch = url.match(/video(-?\d+_\d+)/);
+            if (videoMatch) {
+                return `https://vk.com/video_ext.php?oid=${videoMatch[1].split('_')[0]}&id=${videoMatch[1].split('_')[1]}`;
+            }
+
+            return null;
+        }
         async function fetchGameInfo() {
             try {
                 const response = await fetch('/api/v1/game/data');
+                
+                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+                
                 const data = await response.json(); 
 
                 const overlay = document.getElementById('game-overlay');
@@ -213,7 +247,6 @@
 
                     if (data.stream_url) {
                         const embedUrl = vkLinkToEmbed(data.stream_url);
-
                         if (embedUrl && vkPlayer.src !== embedUrl) {
                             vkPlayer.src = embedUrl;
                         }
@@ -235,20 +268,8 @@
                     overlay.classList.add('opacity-100', 'pointer-events-auto');
                 }
             } catch (error) {
-                console.error("Ошибка соединения с сервером:", error);
+                console.debug("Ожидание бэкенда:", error.message);
             }
-        }
-
-        function vkLinkToEmbed(url) {
-            if (url.includes("video_ext.php")) return url;
-
-            const match = url.match(/video(-?\d+)_(\d+)/);
-            if (!match) return null;
-
-            const oid = match[1];
-            const id = match[2];
-
-            return `https://vk.com/video_ext.php?oid=${oid}&id=${id}&autoplay=1`;
         }
 
         setInterval(fetchGameInfo, 2000);
@@ -304,7 +325,7 @@
                 try {
                     await navigator.share({
                         title: 'ПМЭФ-2026 шахматная партия',
-                        text: 'Следите за партией Губернатора в прямом эфире! #ОмскШахматнаяСтолица',
+                        text: 'Следите за партией губернатора в прямом эфире! #ОмскШахматнаяСтолица',
                         url: url
                     });
                 } catch {}
