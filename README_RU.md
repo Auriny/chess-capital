@@ -44,7 +44,7 @@
 - Tailwind
 - chess.js
 
-<img width="1001" height="318" alt="image" src="https://github.com/user-attachments/assets/7076ba73-8b3f-4899-a3b3-68406c19b70e" />
+<img width="1018" height="327" alt="image" src="https://github.com/user-attachments/assets/f59cb93e-8ada-433c-893f-dfa7a096c74c" />
 
 ---
 
