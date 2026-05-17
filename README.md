@@ -11,6 +11,7 @@ The project works as a multi-service application:
 - **cv-service** - computer-vision
 - **game-service** - backend logic of the app
 - **frontend** - lightweight client interface
+- 
 <img width="2400" height="1021" alt="chess2" src="https://github.com/user-attachments/assets/a3775718-4c60-4bd1-97cf-44c869a90aa1" />
 
 ---
@@ -24,6 +25,7 @@ The project works as a multi-service application:
 - Multi-service architecture
 - REST API communication between services
 - Vk video streams support
+- 
 <img width="500" height="500" alt="chess" src="https://github.com/user-attachments/assets/ba71ffa0-f9b3-48bd-bb9a-4c15468183d4" />
 
 ---
@@ -44,7 +46,7 @@ The project works as a multi-service application:
 - Tailwind
 - chess.js
 
-<img width="1001" height="318" alt="image" src="https://github.com/user-attachments/assets/7076ba73-8b3f-4899-a3b3-68406c19b70e" />
+<img width="1018" height="327" alt="image" src="https://github.com/user-attachments/assets/f59cb93e-8ada-433c-893f-dfa7a096c74c" />
 
 ---
 
