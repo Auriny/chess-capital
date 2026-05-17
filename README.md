@@ -1,4 +1,4 @@
-[[RU version]](https://github.com/Auriny/chess-capital/blob/master/README_RU.md)
+[[RU version]](README_RU.md)
 # ChessCapital
 A hackathon project that combines computer vision and chess game validation.
 
