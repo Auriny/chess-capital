@@ -1,4 +1,4 @@
-[[EN version]](https://github.com/Auriny/chess-capital/blob/master/README.md)
+[[EN version]](README.md)
 # ChessCapital
 Проект для хакатона, сочетающий в себе компьютерное зрение и валидацию шахматной доски.
 
