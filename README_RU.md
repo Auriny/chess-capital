@@ -1,34 +1,34 @@
-[[RU version]](https://github.com/Auriny/chess-capital/blob/master/README_RU.md)
+[[EN version]](https://github.com/Auriny/chess-capital/blob/master/README.md)
 # ChessCapital
-A hackathon project that combines computer vision and chess game validation.
+Проект для хакатона, сочетающий в себе компьютерное зрение и валидацию шахматной доски.
 
-The system detects a physical chessboard from a phone camera, recognizes piece positions in real time, converts the board into a matrix representation, and validates moves using chess rules.
+Система распознаёт физическую шахматную доску с камеры телефона, считывает позиции фигур в реальном времени, преобразует доску в матричное представление и проверяет корректность ходов по правилам шахмат.
 
 ---
 
-## Overview
-The project works as a multi-service application:
-- **cv-service** - computer-vision
-- **game-service** - backend logic of the app
-- **frontend** - lightweight client interface
+## Обзор
+Проект работает по архитектуре микросервисов:
+- **cv-service** - компьютерное зрение
+- **game-service** - backend-логика приложения
+- **frontend** - лёгкий клиентский интерфейс
 <img width="2400" height="1021" alt="chess2" src="https://github.com/user-attachments/assets/a3775718-4c60-4bd1-97cf-44c869a90aa1" />
 
 ---
 
-## Features
-- Chessboard recognition from camera frames
-- Piece detection using YOLO/OpenCV
-- Conversion of board state into an 8x8 matrix
-- Move validation based on chess rules
-- Illegal move detection
-- Multi-service architecture
-- REST API communication between services
-- Vk video streams support
+## Возможности
+- Распознавание шахматной доски с камеры в реальном времени
+- Определение фигур с использованием YOLO/OpenCV
+- Преобразование состояния доски в матрицу 8x8
+- Проверка ходов по правилам шахмат
+- Обнаружение невозможных ходов
+- Микросервисная архитектура
+- REST API-взаимодействие между сервисами
+- Поддержка стримов VK видео
 <img width="500" height="500" alt="chess" src="https://github.com/user-attachments/assets/ba71ffa0-f9b3-48bd-bb9a-4c15468183d4" />
 
 ---
 
-## Tech Stack
+## Стек технологий
 ### CV Service
 - Python
 - FastAPI
@@ -48,23 +48,23 @@ The project works as a multi-service application:
 
 ---
 
-## Installation
-### Clone repository
+## Установка
+### Клонирование репозитория
 ```bash
 git clone <repo-url>
 cd ChessCapital
 ```
 
-### Start game-service
-https://github.com/Auriny/chess-capital/blob/main/game-service/README.md
+### Запуск game-service
+https://github.com/Auriny/chess-capital/blob/main/game-service/README_RU.md
 
-### Start cv-service
-You can read more here: https://github.com/Auriny/chess-capital/blob/main/cv-service/README.md
+### Запуск cv-service
+https://github.com/Auriny/chess-capital/blob/main/cv-service/README_RU.md
 
-### Start frontend
-To start frontend, put the `frontend` folder on your server and use nginx, python htpp-server or anything else.
+### Запуск фронтенда 
+Чтобы запустить фронтенд, поместите папку на ваш сервер и используйте `nginx`, `python http-server` или любой другой веб-сервер.
 
-For example, we're using Python http-server here: 
+Для примера используем `python http-server`:
 ```bash
 cd frontend
 python -m http.server 5173
@@ -72,7 +72,7 @@ python -m http.server 5173
 
 ---
 
-## Note!
-This is a hackaton project, so there might be some interesting solutions and architectury strangenesses due to lack of time for developing. 
+## Примечание!
+Это хакатон-проект, сделанный всего за неделю, поэтому из-за сжатых сроков в разработке могут встречаться нестандартные решения и архитектурные изъяны.
 
-Thanks for understanding.
+Спасибо за понимание.
