@@ -59,7 +59,7 @@ cd ChessCapital
 https://github.com/Auriny/chess-capital/blob/main/game-service/README.md
 
 ### Start cv-service
-You can read more here: https://github.com/Auriny/chess-capital/blob/main/cv-service/README.md
+https://github.com/Auriny/chess-capital/blob/main/cv-service/README.md
 
 ### Start frontend
 To start frontend, put the `frontend` folder on your server and use nginx, python htpp-server or anything else.
