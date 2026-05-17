@@ -54,18 +54,23 @@ The project works as a multi-service application:
 git clone <repo-url>
 cd ChessCapital
 ```
+
 ### Start game-service
 ```bash
 cd game-service
 uv sync
 uv run uvicorn main:app --reload --port 8080
 ```
+You can read more here: https://github.com/Auriny/chess-capital/blob/main/game-service/README.md
+
 ### Start cv-service
 ```bash
 cd cv-service
 uv sync
 uv run uvicorn main:app --reload --port 8081
 ```
+You can read more here: https://github.com/Auriny/chess-capital/blob/main/cv-service/README.md
+
 ### Start frontend
 To start frontend, put the `frontend` folder on your server and use nginx, python htpp-server or anything else.
 
