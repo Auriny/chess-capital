@@ -1,156 +1,40 @@
-# Как запускать...
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-### А ни как 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-## Ладно, расскажу
+[[RU version]](README_RU.md)
 
-### Для начала нужно достать модель
-```
-https://huggingface.co/surawut/chess-move-tracking-yolo11/resolve/main/models/yolo11m_pieces.pt?download=true
-```
+# Computer Vision Service
 
-### Дальше её надо перекинуть в корень папки с сервисом и переименовать в model.pt
+## Goals
 
-### Установи uv
+Analysis of the position on the board and sending for processing
+
+## Pre-requirements
+
+Install uv
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-### Укажи конкретную версию
-```text
-uv python pin 3.11.14
-```
-
-### Установи зависимости
-
+Set python version to 3.11.14 and install dependencies
 ```bash
+uv python pin 3.11.14
 uv venv
 uv sync
 ```
 
-### Укажи порт сервиса игры
-```text
+Download model from HuggingFace to this folder
+```bash
+wget -O model.pt "https://huggingface.co/surawut/chess-move-tracking-yolo11/resolve/main/models/yolo11m_pieces.pt"
+```
+
+Set the port of game-service. Example:
+```
 GAME_PORT = 8080
 ```
 
-### Запускать с помощью команды
+## Start Service
 
+Just run this command
 ```bash
-uv run uvicorn main:app --reload --host 0.0.0.0 --port 8081 # Тут порт заменить на нужный при необходимости
+uv run uvicorn main:app --reload --host 0.0.0.0 --port 8081 # change port if necessary
 ```
 
-При желании, можно запустить его как сервис если добавить аргумент -D/--daemon в строку запуска
-
-<sub><sup><sub><sup><sub><sup><sub><sup>42 БРАТУХА 42 42 42 42</sub></sup></sub></sup></sub></sup></sub></sup>
+If you want to start as daemon just add `-D` or `--daemon` in command
