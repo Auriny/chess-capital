@@ -11,7 +11,7 @@ The project works as a multi-service application:
 - **cv-service** - computer-vision
 - **game-service** - backend logic of the app
 - **frontend** - lightweight client interface
-- 
+
 <img width="2400" height="1021" alt="chess2" src="https://github.com/user-attachments/assets/a3775718-4c60-4bd1-97cf-44c869a90aa1" />
 
 ---
@@ -25,7 +25,7 @@ The project works as a multi-service application:
 - Multi-service architecture
 - REST API communication between services
 - Vk video streams support
-- 
+
 <img width="500" height="500" alt="chess" src="https://github.com/user-attachments/assets/ba71ffa0-f9b3-48bd-bb9a-4c15468183d4" />
 
 ---
